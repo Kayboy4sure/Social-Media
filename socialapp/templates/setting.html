@@ -1,0 +1,118 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="view-account">
+            <section class="module">
+                <div class="module-inner">
+                    {% for message in messages %}
+                    {{message}}
+                    {% endfor %}
+                    <div class="content-panel">
+                        <a class="navbar-brand col-lg-3" style="font-size: 40px;" href="/"><-</a>
+                        <h2 class="title">Profile Settings : <span class="pro-label label label-warning">{{user.username}}</span></h2>
+                        <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            
+                            <fieldset class="fieldset">
+                                <h3 class="fieldset-title">Personal Info</h3>
+                                <div class="form-group avatar">
+                                    <figure class="figure col-md-2 col-sm-3 col-xs-12">
+                                        <img class="img-rounded img-responsive" src="{{profile.profilepic.url}}" alt="" width="300px" height="400px">
+                                    </figure>
+                                </div>
+                                {% for fieldset in form %}
+                                {% if fieldset == form.profilepic %}
+                                <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                                    {{fieldset.label_tag}}
+                                    {{fieldset}}
+                                    <!-- <button type="submit" class="btn btn-sm btn-default-alt pull-left">Update Image</button> -->
+                                </div>
+                                {% elif fieldset == form.wallpaper %}
+                                <div class="form-inline col-md-10 col-sm-9 col-xs-12">
+                                    {{fieldset.label_tag}}
+                                    {{fieldset}}
+                                    <!-- <button type="submit" class="btn btn-sm btn-default-alt pull-left">Update Wallpaper</button> -->
+                                </div>
+                                {% else %}
+                                <div class="form-group">
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">{{fieldset.label}}</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        {{fieldset}}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endfor %}
+                            <!-- <div class="form-group">
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">{{form.username.label}}</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" value="Rebecca">
+                                    </div>
+                                </div>
+            
+                                <div class="form-group">
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">First Name</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" value="Rebecca">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2 col-sm-3 col-xs-12 control-label">Last Name</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" value="Sanders">
+                                    </div>
+                                </div>
+                            </fieldset>
+                            <fieldset class="fieldset">
+                                <h3 class="fieldset-title">Contact Info</h3>
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Email</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="email" class="form-control" value="Rebecca@website.com">
+                                        <p class="help-block">This is the email </p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Twitter</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="text" class="form-control" value="SpeedyBecky">
+                                        <p class="help-block">Your twitter username</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-2  col-sm-3 col-xs-12 control-label">Linkedin</label>
+                                    <div class="col-md-10 col-sm-9 col-xs-12">
+                                        <input type="url" class="form-control" value="https://www.linkedin.com/in/lorem">
+                                        <p class="help-block">eg. https://www.linkedin.com/in/yourname</p>
+                                    </div>
+                                </div>
+                            </fieldset> -->
+                            <hr>
+                            <div class="form-group">
+                                <div class="col-md-10 col-sm-9 col-xs-12 col-md-push-2 col-sm-push-3 col-xs-push-0">
+                                    <input class="btn btn-primary" type="submit" value="Update Profile">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>
